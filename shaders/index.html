@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Diablo 2 - Shaders Comparison Screenshots</title>
+	<meta name="description" content="Preliminary libretro shaders comparison images on CNC-DDraw on Diablo 2">
+	<meta name="keywords" content="Preliminary libretro shaders, cnc-ddraw, diablo 2">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/content.css">
+	<script src="js/content.js"></script>
+</head>
+<body>
+	<header>
+		<div>
+			<h1>Additional shader comparison for Diablo 2 with cnc-ddraw (Resurgence mod)</h1>
+			<p>All screenshots taken on 1602x900 (1.5x scaled) resolution.</p>
+		</div>
+	</header>
+	<main>
+		<section>
+			<template>
+				<div id="s{key}">
+					<div class="cn">
+						<span><img src=""></span>
+						<u><select>
+							<option value="nearest-neighbor">Nearest Neighbor</option>
+							<option value="nearest-neighbor">Catmull-Rom Bilinear</option>
+							<option value="bicubic">Bicubic</option>
+							<option value="bicubic-tuned">Bicubic Tuned Parameters</option>
+							<option value="xbr-lv2-noblend">xBR LV2 NoBlend</option>
+							<option value="cut">CUT</option>
+							<option value="ddt">DDT</option>
+							<option value="ddt-extended">DDT Extended</option>
+							<option value="ddt-jinc">DDT Jinc</option>
+							<option value="ddt-xbr-lv1">DDT xBR LV1</option>
+						</select></u>
+					</div>
+				</div>
+			</template>
+		</section>
+	</main>
+</body>
+</html>
