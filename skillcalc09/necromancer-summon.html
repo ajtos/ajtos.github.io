@@ -1,0 +1,306 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/necromancer-summon.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:33 GMT -->
+<head>
+	<title>LoD - Necromancer Summoning Spells</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="monstats.js"></script>
+	<script language=JavaScript src="missiles.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('<span id="n00">0</span> monsters<br>');
+	document.write('Maximum Life: <span id="n01">0</span> percent<br>');
+	document.write('Damage Bonus: <span id="n02">0</span> percent<br>');
+	document.write('Walk/Run Speed: <span id="n03">0</span> percent<br>');
+	document.write('Duration: <span id="n04">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n05">0</span><br>');
+}
+
+function update0(skill, slvl) {
+	setValue(0, slvl);
+	setValue(1, signed(parseInt(skill[56])+sm_life_bonus));
+	setValue(2, signed(damage_bonus));
+	setValue(3, signed(parseInt(skill[64])));
+	setValue(4, linear(skill[60], skill[62], slvl)/25);
+	setValue(5, mana(skill, slvl));
+}
+
+function print1() {
+	document.write('Life: <span id="n10">0</span><br>');
+	document.write('Defense: <span id="n11">0</span><br>');
+	document.write('Fire Damage: <span id="n12">0</span>');
+	document.write('-<span id="n13">0</span><br>');
+	document.write('Attack Rating: <span id="n14">0</span><br>');
+	document.write('Absorbs <span id="n15">0</span> percent fire damage<br>');
+	document.write('Holy Fire Radius: <span id="n16">0</span> yards<br>');
+	document.write('Holy Fire Damage: <span id="n17">0</span>');
+	document.write('-<span id="n18">0</span><br>');
+	document.write('Walk/Run Speed: <span id="n19">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n110">0</span><br>');
+}
+
+function update1(skill, slvl) {
+	var dam = linear(skill[60], skill[62], slvl);
+	var aura_lvl = linear(skill[64], skill[66], slvl);
+	setValue(0, decimal(monster_life(294, 0, slvl)*(1+gm_life_bonus/100), 0));
+	setValue(1, monster_defense(294));
+	setValue(2, monster_damage1(294, dam, slvl));
+	setValue(3, monster_damage2(294, dam, slvl));
+	setValue(4, monster_attack(294));
+	setValue(5, decimal(diminish(skill[56], skill[58], slvl), 0));
+	setValue(6, yards(linear(data[102][56], data[102][58], aura_lvl)));
+	setValue(7, decimal(magic1(data[102], aura_lvl), 0));
+	setValue(8, decimal(magic2(data[102], aura_lvl), 0));
+	setValue(9, signed(speed_bonus));
+	setValue(10, mana(skill, slvl));
+}
+
+function print2() {
+	document.write('Life: <span id="n20">0</span><br>');
+	document.write('Defense: <span id="n21">0</span><br>');
+	document.write('Damage: <span id="n22">0</span>');
+	document.write('-<span id="n23">0</span><br>');
+	document.write('Attack Rating: <span id="n24">0</span> percent<br>');
+	document.write('Damage Returned: <span id="n25">0</span> percent<br>');
+	document.write('Damage Returned to Players: <span id="n26">0</span> percent<br>');
+	document.write('Walk/Run Speed: <span id="n27">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n28">0</span><br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, decimal(monster_life(293, 0, slvl)*(1+gm_life_bonus/100), 0));
+	setValue(1, monster_defense(293));
+	setValue(2, monster_damage1(293, 0, slvl));
+	setValue(3, monster_damage2(293, 0, slvl));
+	setValue(4, monster_attack(293));
+	setValue(5, slvl > 1 ? linear(skill[56], skill[58], slvl-1) : 0);
+	setValue(6, slvl > 1 ? linear(skill[60], skill[62], slvl-1) : 0);
+	setValue(7, signed(speed_bonus));
+	setValue(8, mana(skill, slvl));
+}
+
+function print3() {
+	document.write('Resist All: <span id="n30">0</span> percent<br>');
+}
+
+function update3(skill, slvl) {
+	setValue(0, signed(decimal(diminish(skill[56], skill[58], slvl), 0)));
+}
+
+function print4() {
+	document.write('Life: <span id="n40">0</span><br>');
+	document.write('Defense: <span id="n41">0</span><br>');
+	document.write('Damage: <span id="n42">0</span>');
+	document.write('-<span id="n43">0</span><br>');
+	document.write('Attack Rating: <span id="n44">0</span><br>');
+	document.write('Life Steal: <span id="n45">0</span> percent<br>');
+	document.write('<span id="n46">0</span> percent of stolen life goes to caster<br>');
+	document.write('<span id="n47">0</span> percent of damage taken hurst caster<br>');
+	document.write('<span id="n48">0</span> percent of caster healing goes to golem<br>');
+	document.write('Walk/Run Speed: <span id="n49">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n410">0</span><br>');
+}
+
+function update4(skill, slvl) {
+	var dam = parseInt(skill[62])*(slvl-1);
+	setValue(0, decimal(monster_life(292, 0, slvl)*(1+gm_life_bonus/100), 0));
+	setValue(1, monster_defense(292));
+	setValue(2, monster_damage1(292, dam, slvl));
+	setValue(3, monster_damage2(292, dam, slvl));
+	setValue(4, monster_attack(292));
+	setValue(5, decimal(diminish(skill[56], skill[58], slvl), 0));
+	setValue(6, parseInt(skill[60]));
+	setValue(7, parseInt(skill[64]));
+	setValue(8, parseInt(skill[66]));
+	setValue(9, signed(speed_bonus));
+	setValue(10, mana(skill, slvl));
+}
+
+function print5() {
+	document.write('<span id="n50">0</span> skeleton mages<br>');
+	document.write('Life: <span id="n51">0</span><br>');
+	document.write('Defense: <span id="n52">0</span><br>');
+	document.write('Poison Damage: <span id="n53">0</span><br>');
+//	document.write('-<span id="n54">0</span><br>');
+	document.write('over <span id="n55">0</span> seconds<br>');
+	document.write('Cold Damage: <span id="n56">0</span>');
+	document.write('-<span id="n57">0</span><br>');
+	document.write('Cold Length: <span id="n58">0</span> seconds<br>');
+	document.write('Fire Damage: <span id="n59">0</span>');
+	document.write('-<span id="n510">0</span><br>');
+	document.write('Lightning Damage: <span id="n511">0</span>');
+	document.write('-<span id="n512">0</span><br>');
+	document.write('Attack Rating: <span id="n513">0</span><br>');
+	document.write('Mana Cost: <span id="n514">0</span><br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, slvl);
+	setValue(1, monster_life(366, 0, slvl));
+	setValue(2, monster_defense(366));
+	var lvl = 1+parseInt(document.forms[0].slvl[9].value);
+	var len = missile_dur(210, lvl);
+	setValue(3, decimal(25*len*magic_missile1(210, lvl), 0));
+//	setValue(4, decimal(25*len*magic_missile2(210, lvl), 0));
+	setValue(5, len);
+	setValue(6, magic_missile1(211, lvl));
+	setValue(7, magic_missile2(211, lvl));
+	setValue(8, missile_dur(211, lvl));
+	setValue(9, magic_missile1(212, lvl));
+	setValue(10, magic_missile2(212, lvl));
+	setValue(11, magic_missile1(213, lvl));
+	setValue(12, magic_missile2(213, lvl));
+	setValue(13, monster_attack(366));
+	setValue(14, mana(skill, slvl));
+}
+
+function print6() {
+	document.write('Maximum Life: <span id="n60">0</span> percent<br>');
+	document.write('Walk/Run Speed: <span id="n61">0</span> percent<br>');
+}
+
+var gm_life_bonus = 0;
+var speed_bonus = 0;
+function update6(skill, slvl) {
+	gm_life_bonus = slvl*parseInt(skill[56]);
+	speed_bonus = decimal(diminish(skill[60], skill[62], slvl), 0)
+	setValue(0, signed(gm_life_bonus));
+	setValue(1, signed(speed_bonus));
+}
+
+function print7() {
+	document.write('Life: <span id="n70">0</span><br>');
+	document.write('Defense: <span id="n71">0</span><br>');
+	document.write('Damage: <span id="n72">0</span>');
+	document.write('-<span id="n73">0</span><br>');
+	document.write('Attack Rating: <span id="n74">0</span><br>');
+	document.write('Walk/Run Speed: <span id="n75">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n76">0</span><br>');
+}
+
+function update7(skill, slvl) {
+	var dam = parseInt(skill[58])*(slvl-1);
+	setValue(0, decimal(monster_life(291, parseInt(skill[56]), slvl)+monster_life(291, parseInt(skill[56]), 1)*(gm_life_bonus/100), 0));
+	setValue(1, monster_defense(291));
+	setValue(2, monster_damage1(291, dam, slvl));
+	setValue(3, monster_damage2(291, dam, slvl));
+	setValue(4, monster_attack(291));
+	setValue(5, signed(speed_bonus));
+	setValue(6, mana(skill, slvl));
+}
+
+function print8() {
+	document.write('<span id="n80">0</span> skeletons<br>');
+	document.write('Life: <span id="n81">0</span><br>');
+	document.write('Defense: <span id="n82">0</span><br>');
+	document.write('Damage: <span id="n83">0</span>');
+	document.write('-<span id="n84">0</span><br>');
+	document.write('Attack Rating: <span id="n85">0</span><br>');
+	document.write('<span id="n86">0</span> percent chance of shield<br>');
+	document.write('Mana Cost: <span id="n87">0</span><br>');
+}
+
+function update8(skill, slvl) {
+	setValue(0, slvl);
+	setValue(1, monster_life(365, 0, slvl)+sm_life_bonus);
+	setValue(2, monster_defense(365));
+	setValue(3, monster_damage1(365, 0, slvl)+damage_bonus);
+	setValue(4, monster_damage2(365, 0, slvl)+damage_bonus);
+	setValue(5, monster_attack(365));
+	setValue(6, parseInt(skill[56]));
+	setValue(7, mana(skill, slvl));
+}
+
+function print9() {
+	document.write('Skeletons: Life: <span id="n90">0</span><br>');
+	document.write('Skeletons: Damage: <span id="n91">0</span><br>');
+	document.write('Mage Spell Level: <span id="n92">0</span><br>');
+	document.write('Monsters: Life: <span id="n93">0</span> percent<br>');
+	document.write('Monsters: Damage: <span id="n94">0</span> percent<br>');
+}
+
+var sm_life_bonus = 0;
+var damage_bonus = 0;
+function update9(skill, slvl) {
+	sm_life_bonus = slvl*parseInt(skill[56]);
+	damage_bonus = slvl*parseInt(skill[58])
+	setValue(0, signed(sm_life_bonus));
+	setValue(1, signed(damage_bonus));
+	setValue(2, slvl+1);
+	setValue(3, signed(sm_life_bonus));
+	setValue(4, signed(damage_bonus));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[95,94,90,89,85,80,79,75,70,69];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('necromancer', 1);self.focus()" onUnload="save_values()">
+
+<map name="skill">
+<area shape=rect coords="17,385,47,415" onClick="closeWindow()" alt="Close Window">
+<area shape=rect coords="231,216,320,322" href="necromancer-poison.html" alt="Poison and Bone Spells">
+<area shape=rect coords="231,323,320,430" href="necromancer-curses.html" alt="Curses">
+<area onmouseover=show(0) onclick=add(0) onmouseout=hide() shape=rect coords="154,353,202,400">
+<area onmouseover=show(1) onclick=add(1) onmouseout=hide() shape=rect coords="85,353,132,400">
+<area onmouseover=show(2) onclick=add(2) onmouseout=hide() shape=rect coords="85,285,133,332">
+<area onmouseover=show(3) onclick=add(3) onmouseout=hide() shape=rect coords="16,285,64,333">
+<area onmouseover=show(4) onclick=add(4) onmouseout=hide() shape=rect coords="85,217,133,264">
+<area onmouseover=show(5) onclick=add(5) onmouseout=hide() shape=rect coords="154,149,201,196">
+<area onmouseover=show(6) onclick=add(6) onmouseout=hide() shape=rect coords="16,149,64,196">
+<area onmouseover=show(7) onclick=add(7) onmouseout=hide() shape=rect coords="85,81,133,128">
+<area onmouseover=show(8) onclick=add(8) onmouseout=hide() shape=rect coords="154,13,201,60">
+<area onmouseover=show(9) onclick=add(9) onmouseout=hide() shape=rect coords="16,13,63,60">
+</map>
+
+<img src="images/necromancer-summon.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:196px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:398px; left:127px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<form>
+<select style="position:absolute;bottom:0;right:0" name="diff">
+<option value="1">Normal</option>
+<option value="2">Nightmare</option>
+<option value="3">Hell</option>
+</select>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="right:0; bottom: 79;" id=b0><script>print(0);</script></div>
+<div style="left :0; bottom: 79;" id=b1><script>print(1);</script></div>
+<div style="left :0; bottom:147;" id=b2><script>print(2);</script></div>
+<div style="left :0; bottom:147;" id=b3><script>print(3);</script></div>
+<div style="left :0; top   :  0;" id=b4><script>print(4);</script></div>
+<div style="left :0; bottom:  0;" id=b5><script>print(5);</script></div>
+<div style="left :0; top   :197;" id=b6><script>print(6);</script></div>
+<div style="left :0; top   :129;" id=b7><script>print(7);</script></div>
+<div style="right:0; top   : 61;" id=b8><script>print(8);</script></div>
+<div style="left :0; top   : 61;" id=b9><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/necromancer-summon.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:33 GMT -->
+</html>
+
+

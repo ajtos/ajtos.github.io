@@ -1,0 +1,275 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/assassin-martialarts.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:32 GMT -->
+<head>
+	<title>LoD - Assassin Martial Arts</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="missiles.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('Charge 1 - meteor damage: <span id="n00">0</span>');
+	document.write('-<span id="n01">0</span><br>');
+	document.write('meteor explosion radius: <span id="n02">0</span> yards<br>');
+	document.write('meteor fire damage: <span id="n03">0</span>');
+	document.write('-<span id="n04">0</span> per second<br>');
+	document.write('meteor fire duration: <span id="n05">0</span> seconds<br>');
+	document.write('Charge 2 - chain lightning damage: <span id="n06">0</span>');
+	document.write('-<span id="n07">0</span><br>');
+	document.write('chain lightning jump radius: <span id="n08">0</span> yards<br>');
+	document.write('Charge 3 - chaos ice bolt damage: <span id="n09">0</span>');
+	document.write('-<span id="n010">0</span><br>');
+	document.write('number of chaos ice bolts: <span id="n011">0</span><br>');
+	document.write('Attack Rating: <span id="n012">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n013">0</span><br>');
+}
+
+function update0(skill, slvl) {
+	setValue(0, magic_missile1(566, slvl));
+	setValue(1, magic_missile2(566, slvl));
+	setValue(2, yards(parseInt(skill[58])));
+	setValue(3, decimal(75*magic_missile1(570, slvl), 0));
+	setValue(4, decimal(75*magic_missile2(570, slvl), 0));
+	setValue(5, linear(skill[60], skill[62], slvl)/25);
+	setValue(6, 1);
+	setValue(7, magic_missile2(571, slvl));
+	setValue(8, yards(parseInt(skill[56])));
+	setValue(9, magic_missile1(572, slvl));
+	setValue(10, magic_missile2(572, slvl));
+	setValue(11, parseInt(skill[64]));
+	setValue(12, signed(attack(skill, slvl)));
+	setValue(13, mana(skill, slvl));
+}
+
+function print1() {
+	document.write('Kick Damage: <span id="n10">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n11">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n12">0</span><br>');
+}
+
+function update1(skill, slvl) {
+	setValue(0, signed(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(attack(skill, slvl)));
+	setValue(2, mana(skill, slvl));
+}
+
+function print2() {
+	document.write('Charge 1 - cold damge: <span id="n20">0</span>');
+	document.write('-<span id="n21">0</span><br>');
+	document.write('cold length: <span id="n22">0</span> seconds<br>');
+	document.write('Charge 2 - cold damage radius: <span id="n23">0</span> yards<br>');
+	document.write('Charge 3 - cold damage radius: <span id="n24">0</span> yards<br>');
+	document.write('freeze duration: <span id="n25">0</span> seconds<br>');
+	document.write('Cold Damage: <span id="n26">0</span>');
+	document.write('-<span id="n27">0</span><br>');
+	document.write('Cold Length: <span id="n28">0</span> seconds<br>');
+	document.write('Attack Rating: <span id="n29">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n210">0</span><br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, magic1(skill, slvl));
+	setValue(1, magic2(skill, slvl));
+	setValue(2, dur(skill, slvl));
+
+	setValue(3, yards(parseInt(skill[56])));
+	setValue(4, yards(parseInt(skill[58])));
+	setValue(5, dur(skill, slvl));
+
+	setValue(6, magic1(skill, slvl));
+	setValue(7, magic2(skill, slvl));
+	setValue(8, dur(skill, slvl));
+	setValue(9, signed(attack(skill, slvl)));
+	setValue(10, mana(skill, slvl));
+}
+
+function print3() {
+	document.write('Fire Damage: <span id="n30">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n31">0</span> percent<br>');
+	document.write('Attack Speed: <span id="n32">0</span> percent<br>');
+	document.write('Radius: <span id="n33">0</span> yards<br>');
+	document.write('Mana Cost: <span id="n34">0</span><br>');
+}
+
+function update3(skill, slvl) {
+	setValue(0, signed(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(attack(skill, slvl)));
+	setValue(2, signed(parseInt(skill[62])));
+	setValue(3, yards(parseInt(skill[60])));
+	setValue(4, mana(skill, slvl));
+}
+
+function print4() {
+	document.write('Charge 1 - lightning damage: <span id="n40">0</span>');
+	document.write('-<span id="n41">0</span><br>');
+	document.write('Charge 2 - nova damage: <span id="n42">0</span>');
+	document.write('-<span id="n43">0</span><br>');
+	document.write('Charge 3 - charged bolt damage: <span id="n44">0</span>');
+	document.write('-<span id="n45">0</span><br>');
+	document.write('Lightning Damage: <span id="n46">0</span>');
+	document.write('-<span id="n47">0</span><br>');
+	document.write('Attack Rating: <span id="n48">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n49">0</span><br>');
+}
+
+function update4(skill, slvl) {
+	setValue(0, magic1(skill, slvl));
+	setValue(1, magic2(skill, slvl));
+	setValue(2, 1);
+	setValue(3, magic_missile2(562, slvl));
+	setValue(4, 1);
+	setValue(5, magic_missile2(561, slvl));
+	setValue(6, magic1(skill, slvl));
+	setValue(7, magic2(skill, slvl));
+	setValue(8, signed(attack(skill, slvl)));
+	setValue(9, mana(skill, slvl));
+}
+
+function print5() {
+	document.write('Charge 1 - <span id="n50">0</span> percent life stealing<br>');
+	document.write('Charge 2 - <span id="n51">0</span> percent life and mana stealing<br>');
+	document.write('Charge 3 - <span id="n52">0</span> percent life and mana stealing<br>');
+	document.write('Attack Rating: <span id="n53">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n54">0</span><br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, signed(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(linear(skill[56], skill[58], slvl)));
+	setValue(2, signed(2*linear(skill[56], skill[58], slvl)));
+	setValue(3, signed(attack(skill, slvl)));
+	setValue(4, mana(skill, slvl));
+}
+
+function print6() {
+	document.write('Damage Bonus: <span id="n60">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n61">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n62">0</span><br>');
+}
+
+function update6(skill, slvl) {
+	setValue(0, signed(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(attack(skill, slvl)));
+	setValue(2, mana(skill, slvl));
+}
+
+function print7() {
+	document.write('Charge 1 - fire damage: <span id="n70">0</span>');
+	document.write('-<span id="n71">0</span><br>');
+	document.write('Charge 2 - explosion radius: <span id="n72">0</span> yards<br>');
+	document.write('Charge 3 - fire radius: <span id="n73">0</span> yards<br>');
+	document.write('fire duration: <span id="n74">0</span> seconds<br>');
+	document.write('Fire Damage: <span id="n75">0</span>');
+	document.write('-<span id="n76">0</span><br>');
+	document.write('Attack Rating: <span id="n77">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n78">0</span><br>');
+}
+
+function update7(skill, slvl) {
+	setValue(0, magic1(skill, slvl));
+	setValue(1, magic2(skill, slvl));
+	setValue(2, yards(parseInt(skill[56])));
+	setValue(3, yards(parseInt(skill[58])));
+	setValue(4, missile_length(560, slvl));
+	setValue(5, magic1(skill, slvl));
+	setValue(6, magic2(skill, slvl));
+	setValue(7, signed(attack(skill, slvl)));
+	setValue(8, mana(skill, slvl));
+}
+
+function print8() {
+	document.write('<span id="n80">0</span> Kicks<br>');
+	document.write('Kick Damage: <span id="n81">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n82">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n83">0</span><br>');
+}
+
+function update8(skill, slvl) {
+	setValue(0, max(decimal(diminish("-20", "175", slvl)/40, 0), 1));
+	setValue(1, signed(linear(skill[56], skill[58], slvl)));
+	setValue(2, signed(attack(skill, slvl)));
+	setValue(3, mana(skill, slvl));
+}
+
+function print9() {
+	document.write('Charge 1 - <span id="n90">0</span> percent damage<br>');
+	document.write('Charge 2 - <span id="n91">0</span> percent damage<br>');
+	document.write('Charge 3 - <span id="n92">0</span> percent damage<br>');
+	document.write('Attack Rating: <span id="n93">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n94">0</span><br>');
+}
+
+function update9(skill, slvl) {
+	var pct = linear(skill[56], skill[58], slvl);
+	setValue(0, signed(pct));
+	setValue(1, signed(2*pct));
+	setValue(2, signed(3*pct));
+	setValue(3, signed(attack(skill, slvl)));
+	setValue(4, mana(skill, slvl));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[280,275,274,270,269,265,260,259,255,254];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('assassin', 1);self.focus();" onUnload="save_values();">
+
+<map name="skill">
+<AREA SHAPE=rect ALT="Close Window" COORDS=14,385,48,419 onClick=closeWindow()>
+<AREA SHAPE=rect ALT="Traps" COORDS=229,325,321,432 HREF="assassin-traps.html">
+<AREA SHAPE=rect ALT="Shadow Disciplines" COORDS=230,216,321,324 HREF="assassin-shadow.html">
+<AREA onmouseover=show(0) onclick=add(0) onmouseout=hide() SHAPE=rect COORDS=84,355,133,404>
+<AREA onmouseover=show(1) onclick=add(1) onmouseout=hide() SHAPE=rect COORDS=153,286,202,336>
+<AREA onmouseover=show(2) onclick=add(2) onmouseout=hide() SHAPE=rect COORDS=15,287,65,336>
+<AREA onmouseover=show(3) onclick=add(3) onmouseout=hide() SHAPE=rect COORDS=153,218,202,267>
+<AREA onmouseover=show(4) onclick=add(4) onmouseout=hide() SHAPE=rect COORDS=15,218,64,267>
+<AREA onmouseover=show(5) onclick=add(5) onmouseout=hide() SHAPE=rect COORDS=84,150,133,199>
+<AREA onmouseover=show(6) onclick=add(6) onmouseout=hide() SHAPE=rect COORDS=153,82,202,131>
+<AREA onmouseover=show(7) onclick=add(7) onmouseout=hide() SHAPE=rect COORDS=15,82,64,131>
+<AREA onmouseover=show(8) onclick=add(8) onmouseout=hide() SHAPE=rect COORDS=153,14,202,63>
+<AREA onmouseover=show(9) onclick=add(9) onmouseout=hide() SHAPE=rect COORDS=84,14,133,63>
+</MAP>
+
+
+<img src="images/assassin-martialarts.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:127px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="left :0; bottom: 77;" id="b0"><script>print(0);</script></div>
+<div style="right:0; bottom:145;" id="b1"><script>print(1);</script></div>
+<div style="left :0; bottom:145;" id="b2"><script>print(2);</script></div>
+<div style="right:0; bottom:213;" id="b3"><script>print(3);</script></div>
+<div style="left :65; bottom:113;" id="b4"><script>print(4);</script></div>
+<div style="left :0; top   :199;" id="b5"><script>print(5);</script></div>
+<div style="right:0; top   :131;" id="b6"><script>print(6);</script></div>
+<div style="left :0; top   :131;" id="b7"><script>print(7);</script></div>
+<div style="right:0; top   : 63;" id="b8"><script>print(8);</script></div>
+<div style="left :0; top   : 63;" id="b9"><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/assassin-martialarts.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:32 GMT -->
+</html>
+
+

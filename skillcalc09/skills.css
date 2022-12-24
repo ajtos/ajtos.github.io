@@ -1,0 +1,45 @@
+body {
+	font-size: 10pt;
+	color: #afafaf;
+	font-family: Arial,Helvetica,Sans-Serif;
+}
+
+p {
+	font-size: 10pt;
+	color: #afafaf;
+	font-family: Arial,Helvetica,Sans-Serif;
+}
+
+b {
+	font-weight: bold;
+	font-style: normal;
+	font-family: Arial,Helvetica,Sans-Serif;
+}
+
+br {
+	line-height: 100%
+}
+
+a:link {
+	font-weight: bold;
+	color: #928a70;
+	font-family: Arial,Helvetica,Sans-Serif;
+}
+
+a:visited {
+	font-weight: bold;
+	color: #706850;
+	font-family: Arial,Helvetica,Sans-Serif;
+}
+
+a:active {
+	font-weight: bold;
+	color: #ffffff;
+	font-family: Arial,Helvetica,Sans-Serif;
+}
+
+a:hover {
+	font-weight: bold;
+	color: #ffffff;
+	font-family: Arial,Helvetica,Sans-Serif
+}

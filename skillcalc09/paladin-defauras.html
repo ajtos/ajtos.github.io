@@ -1,0 +1,178 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/paladin-defauras.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:34 GMT -->
+<head>
+	<title>LoD - Paladin Defensive Auras</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('Radius: <span id="n00">0</span> yards<br>');
+	document.write('Elemental Resists: <span id="n01">0</span> percent<br>');
+}
+
+function update0(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(decimal(diminish(skill[60], skill[62], slvl), 0)));
+}
+
+function print1() {
+	document.write('Radius: <span id="n10">0</span> yards<br>');
+	document.write('Chance to redeem soul: <span id="n11">0</span> percent<br>');
+	document.write('Life/Mana Recovered: <span id="n12">0</span> points<br>');
+}
+
+function update1(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, decimal(diminish(skill[60], skill[62], slvl), 0));
+	setValue(2, linear(skill[64], skill[66], slvl));
+}
+
+function print2() {
+	document.write('Radius: <span id="n20">0</span> yards<br>');
+	document.write('Mana Recovery Rate: <span id="n21">0</span> percent<br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(linear(skill[60], skill[62], slvl)));
+}
+
+function print3() {
+	document.write('Radius: <span id="n30">0</span> yards<br>');
+	document.write('Walk/Run Speed: <span id="n31">0</span> percent<br>');
+	document.write('Stamina Bonus: <span id="n32">0</span> percent<br>');
+	document.write('Stamina Recovery Rate: <span id="n33">0</span> percent<br>');
+}
+
+function update3(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(decimal(diminish(skill[64], skill[66], slvl), 0)));
+	setValue(2, signed(linear(skill[60], skill[62], slvl)));
+	setValue(3, signed(linear(skill[60], skill[62], slvl)));
+}
+
+function print4() {
+	document.write('Radius: <span id="n40">0</span> yards<br>');
+	document.write('Resist Lightning: <span id="n41">0</span> percent<br>');
+}
+
+function update4(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(decimal(diminish(skill[60], skill[62], slvl), 0)));
+}
+
+function print5() {
+	document.write('Radius: <span id="n50">0</span> yards<br>');
+	document.write('Duration reduced by <span id="n51">0</span> percent<br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, decimal(diminish(skill[60], skill[62], slvl), 0));
+}
+
+function print6() {
+	document.write('Radius: <span id="n60">0</span> yards<br>');
+	document.write('Resist Cold: <span id="n61">0</span> percent<br>');
+}
+
+function update6(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(decimal(diminish(skill[60], skill[62], slvl), 0)));
+}
+
+function print7() {
+	document.write('Radius: <span id="n70">0</span> yards<br>');
+	document.write('Defense Bonus: <span id="n71">0</span> percent<br>');
+}
+
+function update7(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(linear(skill[60], skill[62], slvl)));
+}
+
+function print8() {
+	document.write('Radius: <span id="n80">0</span> yards<br>');
+	document.write('Resist Fire: <span id="n81">0</span> percent<br>');
+}
+
+function update8(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(decimal(diminish(skill[60], skill[62], slvl), 0)));
+}
+
+function print9() {
+	document.write('Radius: <span id="n90">0</span> yards<br>');
+	document.write('Heals: <span id="n91">0</span> every 2 seconds<br>');
+	document.write('Mana Cost: <span id="n92">0</span><br>');
+}
+
+function update9(skill, slvl) {
+	setValue(0, yards(linear(skill[56], skill[58], slvl)));
+	setValue(1, signed(linear(skill[60], skill[62], slvl)));
+	setValue(2, mana(skill, slvl));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[125,124,120,115,110,109,105,104,100,99];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('paladin', 1);self.focus()" onUnload=save_values()>
+
+<map name="skill">
+<area shape=rect coords="16,384,47,415" href="#" onClick="closeWindow()" alt="Close Window">
+<area shape=rect coords="231,323,326,437" href="paladin-combat.html" alt="Combat Skills">
+<area shape=rect coords="231,216,326,322" href="paladin-offauras.html" alt="Offensive Auras">
+<area onmouseover=show(0) onclick=add(0) onmouseout=hide() shape=rect coords="154,353,201,400">
+<area onmouseover=show(1) onclick=add(1) onmouseout=hide() shape=rect coords="85,354,133,400">
+<area onmouseover=show(2) onclick=add(2) onmouseout=hide() shape=rect coords="16,285,64,332">
+<area onmouseover=show(3) onclick=add(3) onmouseout=hide() shape=rect coords="85,217,133,264">
+<area onmouseover=show(4) onclick=add(4) onmouseout=hide() shape=rect coords="155,148,202,196">
+<area onmouseover=show(5) onclick=add(5) onmouseout=hide() shape=rect coords="16,148,64,196">
+<area onmouseover=show(6) onclick=add(6) onmouseout=hide() shape=rect coords="154,80,202,128">
+<area onmouseover=show(7) onclick=add(7) onmouseout=hide() shape=rect coords="85,81,132,128">
+<area onmouseover=show(8) onclick=add(8) onmouseout=hide() shape=rect coords="154,12,202,61">
+<area onmouseover=show(9) onclick=add(9) onmouseout=hide() shape=rect coords="17,13,64,60">
+</map>
+
+<img src="images/paladin-defauras.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:196px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:398px; left:127px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="right:0; bottom: 79;" id=b0><script>print(0);</script></div>
+<div style="left :0; bottom: 79;" id=b1><script>print(1);</script></div>
+<div style="left :0; bottom:147;" id=b2><script>print(2);</script></div>
+<div style="left :0; bottom:215;" id=b3><script>print(3);</script></div>
+<div style="right:0; top   :197;" id=b4><script>print(4);</script></div>
+<div style="left :0; top   :197;" id=b5><script>print(5);</script></div>
+<div style="right:0; top   :129;" id=b6><script>print(6);</script></div>
+<div style="left :0; top   :129;" id=b7><script>print(7);</script></div>
+<div style="right:0; top   : 61;" id=b8><script>print(8);</script></div>
+<div style="left :0; top   : 61;" id=b9><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/paladin-defauras.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:34 GMT -->
+</html>

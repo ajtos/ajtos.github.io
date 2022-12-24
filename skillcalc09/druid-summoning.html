@@ -1,0 +1,278 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/druid-summoning.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:30 GMT -->
+<head>
+	<title>LoD - Druid Summoning Skills</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="monstats.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('Life: <span id="n00">0</span><br>');
+	document.write('Defense: <span id="n01">0</span><br>');
+	document.write('Damage: <span id="n02">0</span>');
+	document.write('-<span id="n03">0</span><br>');
+	document.write('Attack Rating: <span id="n04">0</span><br>');
+	document.write('Mana Cost: <span id="n05">0</span><br>');
+	document.write('Passive Bonus to Wolves and Bears<br>');
+	document.write('Damage: <span id="n06">0</span> percent<br>');
+}
+
+var damage_bonus = 0;
+function update0(skill, slvl) {
+	damage_bonus = slvl > 0 ? linear(skill[56], skill[58], slvl) : 0;
+	setValue(0, decimal(monster_life(431, 0, slvl)*(1+life_bonus/100), 0));
+	setValue(1, decimal(monster_defense(431)*(1+defense_bonus/100), 0));
+	setValue(2, decimal(physical1(skill, slvl)*(1+damage_bonus/100), 0));
+	setValue(3, decimal(physical2(skill, slvl)*(1+damage_bonus/100), 0));
+	setValue(4, decimal(attack(skill, slvl)*(1+attack_bonus/100), 0));
+	setValue(5, mana(skill, slvl));
+	setValue(6, signed(damage_bonus));
+}
+
+function print1() {
+	document.write('Life: <span id="n10">0</span><br>');
+	document.write('Defense: <span id="n11">0</span><br>');
+	document.write('<span id="n12">0</span> percent damage returned<br>');
+	document.write('<span id="n13">0</span> percent damage returned to players<br>');
+	document.write('Radius: <span id="n14">0</span> yards<br>');
+	document.write('Mana Cost: <span id="n15">0</span><br>');
+}
+
+function update1(skill, slvl) {
+	setValue(0, monster_life(425, parseInt(skill[56]), slvl));
+	setValue(1, monster_defense(425));
+	setValue(2, linear(skill[60], skill[62], slvl));
+	setValue(3, linear(skill[64], skill[66], slvl));
+	setValue(4, 20);
+	setValue(5, mana(skill, slvl));
+}
+
+function print2() {
+	document.write('Life: <span id="n20">0</span><br>');
+	document.write('Defense: <span id="n21">0</span><br>');
+	document.write('Mana Recovery Rate: <span id="n22">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n23">0</span><br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, monster_life(430, parseInt(skill[60]), slvl));
+	setValue(1, monster_defense(430));
+	setValue(2, decimal(diminish(skill[64], skill[66], slvl), 0));
+	setValue(3, mana(skill, slvl));
+}
+
+function print3() {
+	document.write('Wolves: <span id="n30">0</span><br>');
+	document.write('Life: <span id="n31">0</span><br>');
+	document.write('Defense: <span id="n32">0</span><br>');
+	document.write('Damage: <span id="n33">0</span>');
+	document.write('-<span id="n34">0</span><br>');
+	document.write('Attack Rating: <span id="n35">0</span><br>');
+	document.write('Rage Damage: <span id="n36">0</span> percent<br>');
+	document.write('Rage Duration: <span id="n37">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n38">0</span><br>');
+	document.write('Passive Bonus to Wolves and Bears<br>');
+	document.write('Life: <span id="n39">0</span> percent<br>');
+}
+
+var life_bonus = 0;
+function update3(skill, slvl) {
+	life_bonus = slvl > 0 ? linear(skill[56], skill[58], slvl) : 0;
+	setValue(0, min(slvl, parseInt(skill[60])));
+	setValue(1, decimal(monster_life(424, 0, slvl)*(1+life_bonus/100), 0));
+	setValue(2, decimal((monster_defense(424)+parseInt(skill[66])*slvl)*(1+defense_bonus/100), 0));
+	setValue(3, decimal(physical1(skill, slvl)*(1+damage_bonus/100), 0));
+	setValue(4, decimal(physical2(skill, slvl)*(1+damage_bonus/100), 0));
+	setValue(5, decimal(attack(skill, slvl)*(1+attack_bonus/100), 0));
+	setValue(6, signed(parseInt(skill[64])));
+	setValue(7, parseInt(skill[62])/25);
+	setValue(8, mana(skill, slvl));
+	setValue(9, signed(life_bonus));
+}
+
+function print4() {
+	document.write('Life: <span id="n40">0</span><br>');
+	document.write('Defense: <span id="n41">0</span><br>');
+	document.write('Damage Bonus: <span id="n42">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n43">0</span> percent<br>');
+	document.write('Radius: <span id="n44">0</span> yards<br>');
+	document.write('Mana Cost: <span id="n45">0</span><br>');
+}
+
+function update4(skill, slvl) {
+	setValue(0, monster_life(426, parseInt(skill[56]), slvl));
+	setValue(1, monster_defense(426));
+	setValue(2, signed(linear(skill[64], skill[66], slvl)));
+	setValue(3, signed(linear(skill[60], skill[62], slvl)));
+	setValue(4, 20);
+	setValue(5, mana(skill, slvl));
+}
+
+function print5() {
+	document.write('Life: <span id="n50">0</span><br>');
+	document.write('Defense: <span id="n51">0</span><br>');
+	document.write('Heals: <span id="n52">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n53">0</span><br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, monster_life(429, parseInt(skill[60]), slvl));
+	setValue(1, monster_defense(429));
+	setValue(2, decimal(diminish(skill[64], skill[66], slvl), 0));
+	setValue(3, mana(skill, slvl));
+}
+
+function print6() {
+	document.write('Wolves <span id="n60">0</span><br>');
+	document.write('Life: <span id="n61">0</span><br>');
+	document.write('Defense: <span id="n62">0</span><br>');
+	document.write('Damage: <span id="n63">0</span>');
+	document.write('-<span id="n64">0</span><br>');
+	document.write('Attack Rating: <span id="n65">0</span><br>');
+	document.write('Mana Cost: <span id="n66">0</span><br>');
+	document.write('Passive Bonus to Wolves and Bears<br>');
+	document.write('Attack: <span id="n67">0</span> percent<br>');
+	document.write('Defense: <span id="n68">0</span> percent<br>');
+}
+
+var attack_bonus = 0;
+var defense_bonus = 0;
+function update6(skill, slvl) {
+	attack_bonus = slvl > 0 ? linear(skill[56], skill[58], slvl) : 0;
+	defense_bonus = slvl > 0 ? linear(skill[64], skill[66], slvl) : 0;
+	setValue(0, min(slvl, parseInt(skill[60])));
+	setValue(1, decimal(monster_life(423, 0, slvl)*(1+life_bonus/100), 0));
+	setValue(2, decimal((monster_defense(423)+parseInt(skill[62])*slvl)*(1+defense_bonus/100), 0));
+	setValue(3, decimal(physical1(skill, slvl)*(1+damage_bonus/100), 0));
+	setValue(4, decimal(physical2(skill, slvl)*(1+damage_bonus/100), 0));
+	setValue(5, decimal(attack(skill, slvl)*(1+attack_bonus/100), 0));
+	setValue(6, mana(skill, slvl));
+	setValue(7, signed(attack_bonus));
+	setValue(8, signed(defense_bonus));
+}
+
+function print7() {
+	document.write('Life: <span id="n70">0</span><br>');
+	document.write('Defense: <span id="n71">0</span><br>');
+	document.write('Maximum Life: <span id="n72">0</span> percent<br>');
+	document.write('Radius: <span id="n73">0</span> yards<br>');
+	document.write('Mana Cost: <span id="n74">0</span><br>');
+}
+
+function update7(skill, slvl) {
+	setValue(0, monster_life(427, parseInt(skill[56]), slvl));
+	setValue(1, monster_defense(427));
+	setValue(2, signed(linear(skill[56], skill[58], slvl)));
+	setValue(3, 20);
+	setValue(4, mana(skill, slvl));
+}
+
+function print8() {
+	document.write('Life: <span id="n80">0</span><br>');
+	document.write('Defense: <span id="n81">0</span><br>');
+	document.write('Poison Damage: <span id="n82">0</span>');
+	document.write('-<span id="n83">0</span><br>');
+	document.write('over <span id="n84">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n85">0</span><br>');
+}
+
+function update8(skill, slvl) {
+	var len = dur(skill, slvl);
+	setValue(0, monster_life(428, parseInt(skill[60]), slvl));
+	setValue(1, monster_defense(428));
+	setValue(2, decimal(25*len*magic1(skill, slvl), 0));
+	setValue(3, decimal(25*len*magic2(skill, slvl), 0));
+	setValue(4, len);
+	setValue(5, mana(skill, slvl));
+}
+
+function print9() {
+	document.write('Ravens: <span id="n90">0</span><br>');
+	document.write('<span id="n91">0</span> hits<br>');
+	document.write('Damage: <span id="n92">0</span>');
+	document.write('-<span id="n93">0</span><br>');
+	document.write('Mana Cost: <span id="n94">0</span><br>');
+}
+
+function update9(skill, slvl) {
+	setValue(0, min(slvl, parseInt(skill[58])));
+	setValue(1, linear(skill[64], skill[66], slvl));
+	setValue(2, physical1(skill, slvl));
+	setValue(3, physical2(skill, slvl));
+	setValue(4, mana(skill, slvl));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[247,246,241,237,236,231,227,226,222,221];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('druid', 3);self.focus()" onUnload=save_values()>
+
+<map name="skill">
+<AREA SHAPE="rect" ALT="Shape Shifting" COORDS="230,218,321,325" HREF="druid-shapeshifting.html">
+<AREA SHAPE="rect" ALT="Elemental" COORDS="231,109,319,217" HREF="druid-elemental.html">
+<AREA SHAPE="rect" ALT="Close Window" COORDS="169,385,205,420" onClick="closeWindow()">
+<AREA onmouseover=show(0) onclick=add(0) onmouseout=hide() shape=rect coords="84,355,133,404">
+<AREA onmouseover=show(1) onclick=add(1) onmouseout=hide() shape=rect coords="15,356,64,404">
+<AREA onmouseover=show(2) onclick=add(2) onmouseout=hide() shape=rect coords="153,287,203,335">
+<AREA onmouseover=show(3) onclick=add(3) onmouseout=hide() shape=rect coords="83,218,134,268">
+<AREA onmouseover=show(4) onclick=add(4) onmouseout=hide() shape=rect coords="15,218,65,267">
+<AREA onmouseover=show(5) onclick=add(5) onmouseout=hide() shape=rect coords="151,150,202,199">
+<AREA onmouseover=show(6) onclick=add(6) onmouseout=hide() shape=rect coords="83,82,133,131">
+<AREA onmouseover=show(7) onclick=add(7) onmouseout=hide() shape=rect coords="14,82,64,131">
+<AREA onmouseover=show(8) onclick=add(8) onmouseout=hide() shape=rect coords="152,14,202,64">
+<AREA onmouseover=show(9) onclick=add(9) onmouseout=hide() shape=rect coords="83,14,133,64">
+</MAP>
+
+
+<img src="images/druid-summoning.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:127px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:398px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<form>
+<select style="position:absolute;bottom:0;right:0" name="diff">
+<option value="1">Normal</option>
+<option value="2">Nightmare</option>
+<option value="3">Hell</option>
+</select>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="left :0; bottom: 79;" id=b0><script>print(0);</script></div>
+<div style="left :0; bottom: 79;" id=b1><script>print(1);</script></div>
+<div style="right:0; bottom:147;" id=b2><script>print(2);</script></div>
+<div style="right:0; top   :  0;" id=b3><script>print(3);</script></div>
+<div style="left :0; bottom:215;" id=b4><script>print(4);</script></div>
+<div style="right:0; top   :197;" id=b5><script>print(5);</script></div>
+<div style="left :0; top   :129;" id=b6><script>print(6);</script></div>
+<div style="left :0; top   :129;" id=b7><script>print(7);</script></div>
+<div style="right:0; top   : 61;" id=b8><script>print(8);</script></div>
+<div style="left :0; top   : 61;" id=b9><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/druid-summoning.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:31 GMT -->
+</html>
+
+

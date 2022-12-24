@@ -1,0 +1,215 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/paladin-combat.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:29 GMT -->
+<head>
+	<title>LoD - Paladin Combat Skills</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="missiles.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('Lightning Damage: <span id="n00">0</span>');
+	document.write('-<span id="n01">0</span><br>');
+	document.write('<span id="n02">0</span> holy bolts released<br>');
+	document.write('Holy Bolt Damage: <span id="n03">0</span>');
+	document.write('-<span id="n04">0</span><br>');
+	document.write('Mana Cost: <span id="n05">0</span><br>');
+}
+
+function update0(skill, slvl) {
+	setValue(0, magic1(skill, slvl));
+	setValue(1, magic2(skill, slvl));
+	setValue(2, linear(skill[56], skill[58], slvl));
+	setValue(3, magic_missile1(236, slvl));
+	setValue(4, magic_missile2(236, slvl));
+	setValue(5, mana(skill, slvl));
+}
+
+function print1() {
+	document.write('Duration: <span id="n10">0</span> seconds<br>');
+	document.write('Smite Damage: <span id="n11">0</span>');
+	document.write('-<span id="n12">0</span><br>');
+	document.write('Blocking: <span id="n13">0</span> percent<br>');
+	document.write('Defense Bonus: <span id="n14">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n15">0</span><br>');
+}
+
+function update1(skill, slvl) {
+	setValue(0, linear(skill[56], skill[58], slvl)/25);
+	setValue(1, signed(physical1(skill, slvl)));
+	setValue(2, physical2(skill, slvl));
+	setValue(3, signed(decimal(diminish(skill[64], skill[66], slvl), 0)));
+	setValue(4, signed(linear(skill[60], skill[62], slvl)));
+	setValue(5, mana(skill, slvl));
+}
+
+function print2() {
+	document.write('Chance to convert: <span id="n20">0</span> percent<br>');
+	document.write('Duration: <span id="n21">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n22">0</span><br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, decimal(diminish(skill[60], skill[62], slvl), 0));
+	setValue(1, linear(skill[56], skill[58], slvl)/25);
+	setValue(2, mana(skill, slvl));
+}
+
+function print3() {
+	document.write('Magic Damage: <span id="n30">0</span>');
+	document.write('-<span id="n31">0</span><br>');
+	document.write('Concetration influence: <span id="n32">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n33">0</span><br>');
+}
+
+function update3(skill, slvl) {
+	setValue(0, magic1(skill, slvl));
+	setValue(1, magic2(skill, slvl));
+	setValue(2, 100*parseInt(skill[56])/8);
+	setValue(3, mana(skill, slvl));
+}
+
+function print4() {
+	document.write('Attack Rating: <span id="n40">0</span> percent<br>');
+	document.write('Elemental Damages: <span id="n41">0</span> percent<br>');
+	document.write('Cold Length: <span id="n42">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n43">0</span><br>');
+}
+
+function update4(skill, slvl) {
+	setValue(0, signed(attack(skill, slvl)));
+	setValue(1, signed(linear(skill[56], skill[58], slvl)));
+	setValue(2, dur(skill, slvl));
+	setValue(3, mana(skill, slvl));
+}
+
+function print5() {
+	document.write('Damage Bonus: <span id="n50">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n51">0</span> percent<br>');
+	document.write('Speed Increase: <span id="n52">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n53">0</span><br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, signed(linear(skill[60], skill[62], slvl)));
+	setValue(1, signed(attack(skill, slvl)));
+	setValue(2, parseInt(skill[56]));
+	setValue(3, mana(skill, slvl));
+}
+
+function print6() {
+	document.write('<span id="n60">0</span> hits<br>');
+	document.write('Attack Bonus: <span id="n61">0</span> percent<br>');
+	document.write('Attack Speed: <span id="n62">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n63">0</span><br>');
+}
+
+function update6(skill, slvl) {
+	setValue(0, min(parseInt(skill[64])+slvl-1, parseInt(skill[66])));
+	setValue(1, signed(attack(skill, slvl)));
+	setValue(2, signed(parseInt(skill[58])));
+	setValue(3, mana(skill, slvl));
+}
+
+function print7() {
+	document.write('Magic Damage: <span id="n70">0</span>');
+	document.write('-<span id="n71">0</span><br>');
+	document.write('Heals: <span id="n72">0</span>');
+	document.write('-<span id="n73">0</span><br>');
+	document.write('Mana Cost: <span id="n74">0</span><br>');
+}
+
+function update7(skill, slvl) {
+	setValue(0, magic1(skill, slvl));
+	setValue(1, magic2(skill, slvl));
+	setValue(2, linear(skill[56], skill[58], slvl));
+	setValue(3, linear(skill[60], skill[62], slvl));
+	setValue(4, mana(skill, slvl));
+}
+
+function print8() {
+	document.write('Damage: <span id="n80">0</span> percent<br>');
+	document.write('Stun Length: <span id="n81">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n82">0</span><br>');
+}
+
+function update8(skill, slvl) {
+	setValue(0, signed(linear(skill[60], skill[62], slvl)));
+	setValue(1, linear(skill[56], skill[58], slvl)/25);
+	setValue(2, mana(skill, slvl));
+}
+
+function print9() {
+	document.write('<span id="n90">0</span> percent damage to self<br>');
+	document.write('Damage Bonus: <span id="n91">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n92">0</span> percent<br>');
+}
+
+function update9(skill, slvl) {
+	setValue(0, parseInt(skill[60]));
+	setValue(1, signed(linear(skill[56], skill[58], slvl)));
+	setValue(2, signed(attack(skill, slvl)));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[121,117,116,112,111,107,106,101,97,96];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('paladin', 3);self.focus()" onUnload=save_values()>
+
+<map name="skill">
+<area shape=rect coords="17,384,47,414" href="#" onClick="closeWindow()" alt="Close Window">
+<area shape=rect coords="231,216,326,322" href="paladin-offauras.html" alt="Offensive Auras">
+<area shape=rect coords="232,107,326,215" href="paladin-defauras.html" alt="Defensive Auras">
+<area onmouseover=show(0) onclick=add(0) onmouseout=hide() shape=rect coords="86,353,132,399">
+<area onmouseover=show(1) onclick=add(1) onmouseout=hide() shape=rect coords="155,285,201,331">
+<area onmouseover=show(2) onclick=add(2) onmouseout=hide() shape=rect coords="17,285,63,332">
+<area onmouseover=show(3) onclick=add(3) onmouseout=hide() shape=rect coords="86,217,132,264">
+<area onmouseover=show(4) onclick=add(4) onmouseout=hide() shape=rect coords="17,217,64,264">
+<area onmouseover=show(5) onclick=add(5) onmouseout=hide() shape=rect coords="155,149,201,196">
+<area onmouseover=show(6) onclick=add(6) onmouseout=hide() shape=rect coords="17,149,63,195">
+<area onmouseover=show(7) onclick=add(7) onmouseout=hide() shape=rect coords="86,81,133,128">
+<area onmouseover=show(8) onclick=add(8) onmouseout=hide() shape=rect coords="155,13,201,60">
+<area onmouseover=show(9) onclick=add(9) onmouseout=hide() shape=rect coords="17,13,64,60">
+</map>
+
+<img src="images/paladin-combat.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:127px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="left :0; bottom: 79;" id=b0><script>print(0);</script></div>
+<div style="right:0; bottom:147;" id=b1><script>print(1);</script></div>
+<div style="left :0; bottom:147;" id=b2><script>print(2);</script></div>
+<div style="left :0; bottom:215;" id=b3><script>print(3);</script></div>
+<div style="left :0; bottom:215;" id=b4><script>print(4);</script></div>
+<div style="right:0; top   :197;" id=b5><script>print(5);</script></div>
+<div style="left :0; top   :197;" id=b6><script>print(6);</script></div>
+<div style="left :0; top   :129;" id=b7><script>print(7);</script></div>
+<div style="right:0; top   : 61;" id=b8><script>print(8);</script></div>
+<div style="left :0; top   : 61;" id=b9><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/paladin-combat.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:29 GMT -->
+</html>

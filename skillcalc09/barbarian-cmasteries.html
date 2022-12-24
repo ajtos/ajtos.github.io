@@ -1,0 +1,176 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/barbarian-cmasteries.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:33 GMT -->
+<head>
+	<title>LoD - Barbarian Combat Masteries</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('Resistances: <span id="n00">0</span> percent<br>');
+}
+
+function update0(skill, slvl) {
+	setValue(0, signed(decimal(diminish(skill[56], skill[58], slvl), 0)));
+}
+
+function print1() {
+	document.write('Walk/Run Speed: <span id="n10">0</span> percent<br>');
+}
+
+function update1(skill, slvl) {
+	setValue(0, signed(decimal(diminish(skill[56], skill[58], slvl), 0)));
+}
+
+function print2() {
+	document.write('<span id="n20">0</span> percent<br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, signed(linear(skill[56], skill[58], slvl)));
+}
+
+function print3() {
+	document.write('Stamina Bonus: <span id="n30">0</span> percent<br>');
+}
+
+function update3(skill, slvl) {
+	setValue(0, signed(linear(skill[56], skill[58], slvl)));
+}
+
+function print4() {
+	document.write('Damage Bonus: <span id="n40">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n41">0</span> percent<br>');
+	document.write('<span id="n42">0</span> percent chance of Critical Strike<br>');
+}
+
+function update4(skill, slvl) {
+	setValue(0, signed(linear("30", "5", slvl)));
+	setValue(1, signed(linear("30", "8", slvl)));
+	setValue(2, decimal(diminish("0", "25", slvl), 0));
+}
+
+function print5() {
+	document.write('Damage Bonus: <span id="n50">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n51">0</span> percent<br>');
+	document.write('<span id="n52">0</span> percent chance of Critical Strike<br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, signed(linear("28", "5", slvl)));
+	setValue(1, signed(linear("28", "8", slvl)));
+	setValue(2, decimal(diminish("0", "25", slvl), 0));
+}
+
+function print6() {
+	document.write('Damage Bonus: <span id="n60">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n61">0</span> percent<br>');
+	document.write('<span id="n62">0</span> percent chance of Critical Strike<br>');
+}
+
+function update6(skill, slvl) {
+	setValue(0, signed(linear("30", "5", slvl)));
+	setValue(1, signed(linear("30", "8", slvl)));
+	setValue(2, decimal(diminish("0", "25", slvl), 0));
+}
+
+function print7() {
+	document.write('Damage Bonus: <span id="n70">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n71">0</span> percent<br>');
+	document.write('<span id="n72">0</span> percent chance of Critical Strike<br>');
+}
+
+function update7(skill, slvl) {
+	setValue(0, signed(linear("28", "5", slvl)));
+	setValue(1, signed(linear("28", "8", slvl)));
+	setValue(2, decimal(diminish("0", "25", slvl), 0));
+}
+
+function print8() {
+	document.write('Damage Bonus: <span id="n80">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n81">0</span> percent<br>');
+	document.write('<span id="n82">0</span> percent chance of Critical Strike<br>');
+}
+
+function update8(skill, slvl) {
+	setValue(0, signed(linear("28", "5", slvl)));
+	setValue(1, signed(linear("28", "8", slvl)));
+	setValue(2, decimal(diminish("0", "25", slvl), 0));
+}
+
+function print9() {
+	document.write('Damage Bonus: <span id="n90">0</span> percent<br>');
+	document.write('Attack Rating: <span id="n91">0</span> percent<br>');
+	document.write('<span id="n92">0</span> percent chance of Critical Strike<br>');
+}
+
+function update9(skill, slvl) {
+	setValue(0, signed(linear("28", "5", slvl)));
+	setValue(1, signed(linear("28", "8", slvl)));
+	setValue(2, decimal(diminish("0", "25", slvl), 0));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[153,148,145,141,136,135,134,129,128,127];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('barbarian', 2);self.focus()" onUnload=save_values()>
+
+<map name="skill">
+<area shape=rect coords="17,385,47,414" onClick="closeWindow()" alt="Close Window">
+<area shape=rect coords="231,323,320,431" href="barbarian-cskills.html" alt="Combat Skills">
+<area shape=rect coords="231,108,320,215" href="barbarian-warcries.html" alt="Warcries">
+<area onmouseover=show(0) onclick=add(0) onmouseout=hide() shape=rect coords="155,353,202,400">
+<area onmouseover=show(1) onclick=add(1) onmouseout=hide() shape=rect coords="16,285,64,332">
+<area onmouseover=show(2) onclick=add(2) onmouseout=hide() shape=rect coords="154,217,201,264">
+<area onmouseover=show(3) onclick=add(3) onmouseout=hide() shape=rect coords="16,149,64,196">
+<area onmouseover=show(4) onclick=add(4) onmouseout=hide() shape=rect coords="154,81,201,128">
+<area onmouseover=show(5) onclick=add(5) onmouseout=hide() shape=rect coords="85,81,133,128">
+<area onmouseover=show(6) onclick=add(6) onmouseout=hide() shape=rect coords="16,81,63,128">
+<area onmouseover=show(7) onclick=add(7) onmouseout=hide() shape=rect coords="154,13,201,60">
+<area onmouseover=show(8) onclick=add(8) onmouseout=hide() shape=rect coords="85,13,132,60">
+<area onmouseover=show(9) onclick=add(9) onmouseout=hide() shape=rect coords="16,13,63,60">
+</map>
+
+<img src="images/barbarian-cmasteries.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:196px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="right:0; bottom: 79;" id=b0><script>print(0);</script></div>
+<div style="left :0; bottom:147;" id=b1><script>print(1);</script></div>
+<div style="right:0; bottom:215;" id=b2><script>print(2);</script></div>
+<div style="left :0; top   :197;" id=b3><script>print(3);</script></div>
+<div style="right:0; top   :129;" id=b4><script>print(4);</script></div>
+<div style="left :0; top   :129;" id=b5><script>print(5);</script></div>
+<div style="left :0; top   :129;" id=b6><script>print(6);</script></div>
+<div style="right:0; top   : 61;" id=b7><script>print(7);</script></div>
+<div style="left :0; top   : 61;" id=b8><script>print(8);</script></div>
+<div style="left :0; top   : 61;" id=b9><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/barbarian-cmasteries.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:34 GMT -->
+</html>
+
+

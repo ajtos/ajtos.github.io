@@ -1,0 +1,209 @@
+<html>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/barbarian-warcries.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:34 GMT -->
+<head>
+	<title>LoD - Barbarian Warcries</title>
+	<link href="tree.css" type="text/css" rel="stylesheet">
+	<script language=JavaScript src="util.js"></script>
+	<script language=JavaScript src="skills.js"></script>
+	<script language=JavaScript src="strings.js"></script>
+<script>
+
+function print0() {
+	document.write('Duration: <span id="n00">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n01">0</span><br>');
+}
+
+function update0(skill, slvl) {
+	setValue(0, linear(skill[56], skill[58], slvl)/25);
+	setValue(1, mana(skill, slvl));
+}
+
+function print1() {
+	document.write('Damage: <span id="n10">0</span>');
+	document.write('-<span id="n11">0</span><br>');
+	document.write(' Stun Length: <span id="n12">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n13">0</span><br>');
+}
+
+function update1(skill, slvl) {
+	setValue(0, physical1(skill, slvl));
+	setValue(1, physical2(skill, slvl));
+	setValue(2, linear(skill[56], skill[58], slvl)/25);
+	setValue(3, mana(skill, slvl));
+}
+
+function print2() {
+	document.write('Duration: <span id="n20">0</span> seconds<br>');
+	document.write('Radius: <span id="n21">0</span> yards<br>');
+	document.write('Enemy runs up to: <span id="n22">0</span> yards<br>');
+	document.write('Enemy runs for <span id="n23">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n24">0</span><br>');
+}
+
+function update2(skill, slvl) {
+	setValue(0, linear(skill[60], skill[62], slvl)/25);
+	setValue(1, yards(linear(skill[56], skill[58], slvl)));
+	setValue(2, yards(parseInt(skill[64])));
+	setValue(3, parseInt(skill[66])/25);
+	setValue(4, mana(skill, slvl));
+}
+
+function print3() {
+	document.write('Duration: <span id="n30">0</span> seconds<br>');
+	document.write('Max Stamina: <span id="n31">0</span> percent<br>');
+	document.write('Max Life: <span id="n32">0</span> percent<br>');
+	document.write('Max Mana: <span id="n33">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n34">0</span><br>');
+}
+
+function update3(skill, slvl) {
+	var inc = linear(skill[60], skill[62], slvl);
+	setValue(0, linear(skill[56], skill[58], slvl)/25);
+	setValue(1, inc);
+	setValue(2, inc);
+	setValue(3, inc);
+	setValue(4, mana(skill, slvl));
+}
+
+function print4() {
+	document.write('Duration: <span id="n40">0</span> seconds<br>');
+	document.write('Defense: <span id="n41">0</span> percent<br>');
+	document.write('Damage: <span id="n42">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n43">0</span><br>');
+}
+
+function update4(skill, slvl) {
+	setValue(0, linear(skill[56], skill[58], slvl)/25);
+	setValue(1, linear(skill[60], skill[62], slvl));
+	setValue(2, linear(skill[64], skill[66], slvl));
+	setValue(3, mana(skill, slvl));
+}
+
+function print5() {
+	document.write('<span id="n50">0</span> percent chance<br>');
+//	document.write('High Quality Item: <span id="n51">0</span> percent<br>');
+//	document.write('Magic Item: <span id="n52">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n53">0</span><br>');
+}
+
+function update5(skill, slvl) {
+	setValue(0, decimal(diminish(skill[56], skill[58], slvl), 0));
+//	setValue(1, parseInt(skill[60]));
+//	setValue(2, parseInt(skill[62]));
+	setValue(3, mana(skill, slvl));
+}
+
+function print6() {
+	document.write('Duration: <span id="n60">0</span> seconds<br>');
+	document.write('Defense Bonus: <span id="n61">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n62">0</span><br>');
+}
+
+function update6(skill, slvl) {
+	setValue(0, linear(skill[60], skill[62], slvl)/25);
+	setValue(1, signed(linear(skill[56], skill[58], slvl)));
+	setValue(2, mana(skill, slvl));
+}
+
+function print7() {
+	document.write('Target\'s Damage: <span id="n70">0</span> percent<br>');
+	document.write('Target\'s Attack: <span id="n71">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n72">0</span><br>');
+}
+
+function update7(skill, slvl) {
+	setValue(0, linear(skill[60], skill[62], slvl));
+	setValue(1, linear(skill[56], skill[58], slvl));
+	setValue(2, mana(skill, slvl));
+}
+
+function print8() {
+	document.write('<span id="n80">0</span> percent chance<br>');
+	document.write('Healing Potions: <span id="n81">0</span> percent<br>');
+	document.write('Mana Potions: <span id="n82">0</span> percent<br>');
+	document.write('Rejuvination Potions: <span id="n83">0</span> percent<br>');
+	document.write('Mana Cost: <span id="n84">0</span><br>');
+}
+
+function update8(skill, slvl) {
+	setValue(0, decimal(diminish(skill[56], skill[58], slvl), 0));
+	setValue(1, 100-parseInt(skill[60])-parseInt(skill[62]));
+	setValue(2, parseInt(skill[60]));
+	setValue(3, parseInt(skill[62]));
+	setValue(4, mana(skill, slvl));
+}
+
+function print9() {
+	document.write('Enemy runs up to: <span id="n90">0</span> yards<br>');
+	document.write('Enemy runs for <span id="n91">0</span> seconds<br>');
+	document.write('Mana Cost: <span id="n92">0</span><br>');
+}
+
+function update9(skill, slvl) {
+	setValue(0, yards(linear(skill[60], skill[62], slvl)));
+	setValue(1, linear(skill[64], skill[66], slvl)/25);
+	setValue(2, mana(skill, slvl));
+}
+
+var prints=[print0,print1,print2,print3,print4,print5,print6,print7,print8,print9];
+var update=[update0,update1,update2,update3,update4,update5,update6,update7,update8,update9];
+
+var skills=[155,154,150,149,146,142,138,137,131,130];
+</script>
+</head>
+
+<body background=0.html bgcolor=black marginwidth=0 marginheight=0 leftmargin=0 topmargin=0
+	onLoad="load_values('barbarian', 1);self.focus()" onUnload=save_values()>
+
+<map name="skill">
+<area shape=rect coords="173,385,203,414" onClick="closeWindow()" alt="Close Window">
+<area shape=rect coords="231,323,320,431" href="barbarian-cskills.html" alt="Combat Skills">
+<area shape=rect coords="231,216,320,322" href="barbarian-cmasteries.html" alt="Combat Masteries">
+<area onmouseover=show(0) onclick=add(0) onmouseout=hide() shape=rect coords="85,353,132,401">
+<area onmouseover=show(1) onclick=add(1) onmouseout=hide() shape=rect coords="16,353,64,400">
+<area onmouseover=show(2) onclick=add(2) onmouseout=hide() shape=rect coords="154,285,201,332">
+<area onmouseover=show(3) onclick=add(3) onmouseout=hide() shape=rect coords="85,285,133,331">
+<area onmouseover=show(4) onclick=add(4) onmouseout=hide() shape=rect coords="16,217,63,264">
+<area onmouseover=show(5) onclick=add(5) onmouseout=hide() shape=rect coords="154,149,201,197">
+<area onmouseover=show(6) onclick=add(6) onmouseout=hide() shape=rect coords="85,81,133,128">
+<area onmouseover=show(7) onclick=add(7) onmouseout=hide() shape=rect coords="16,81,63,128">
+<area onmouseover=show(8) onclick=add(8) onmouseout=hide() shape=rect coords="154,13,202,60">
+<area onmouseover=show(9) onclick=add(9) onmouseout=hide() shape=rect coords="16,13,64,60">
+</map>
+
+<img src="images/barbarian-warcries.jpg" border=0 usemap="#skill" width=321 height=432>
+
+<form>
+<input type=text style="top:398px; left:127px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:398px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:330px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:262px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:194px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left:128px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top:126px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left:197px;" name=slvl onchange=change(this) onfocus=this.select()>
+<input type=text style="top: 58px; left: 58px;" name=slvl onchange=change(this) onfocus=this.select()>
+</form>
+
+<p class=reset><a href="javascript:reset()">RESET</a></p>
+<p class=pts><span id=pts>0</span> pts</p>
+
+<div style="left :0; bottom: 79;" id=b0><script>print(0);</script></div>
+<div style="left :0; bottom: 79;" id=b1><script>print(1);</script></div>
+<div style="right:0; bottom:147;" id=b2><script>print(2);</script></div>
+<div style="left :0; bottom:147;" id=b3><script>print(3);</script></div>
+<div style="left :0; bottom:215;" id=b4><script>print(4);</script></div>
+<div style="right:0; top   :197;" id=b5><script>print(5);</script></div>
+<div style="left :0; top   :129;" id=b6><script>print(6);</script></div>
+<div style="left :0; top   :129;" id=b7><script>print(7);</script></div>
+<div style="right:0; top   : 61;" id=b8><script>print(8);</script></div>
+<div style="left :0; top   : 61;" id=b9><script>print(9);</script></div>
+
+</body>
+
+<!-- Mirrored from www.cs.hmc.edu/~cbradfor/diablo2/barbarian-warcries.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Jul 2022 17:15:34 GMT -->
+</html>
+
+
